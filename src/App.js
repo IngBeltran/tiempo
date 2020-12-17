@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import Search from './components/Search'
+import Results from './components/Results'
+import useHttpSearch from './hooks/httpHook'
 
 function App() {
+    const [items, search] = useHttpSearch() 
+
+    const doSearch = e => {
+        if(e.key === 'Enter') search(e.target.value)
+    }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search handleSearch={doSearch} />
+      <Results items={items} />
     </div>
   );
 }
